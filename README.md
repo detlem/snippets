@@ -8,7 +8,7 @@
 
 | パス | 概要 |
 | --- | --- |
-| [`python/async/bounded_concurrency.py`](python/async/bounded_concurrency.py) | 非同期 I/O（vLLM 推論など完了時間がバラつくタスク）を **最大同時実行数を固定したまま** 流す雛形。1本終わるごとに次を投入し、継続バッチ（continuous batching）/ コネクションプールを飽和させる。窓スライド版（`map_as_completed`）＋セマフォ版（`gather_bounded`）＋ fail-soft / 一時エラーのみ指数バックオフ再試行つき。 |
+| [`python/async/bounded_concurrency.py`](python/async/bounded_concurrency.py) | 非同期 I/O（vLLM 推論など完了時間がバラつくタスク）を **最大同時実行数を固定したまま** 流す雛形。1本終わるごとに次を投入し、継続バッチ（continuous batching）/ コネクションプールを飽和させる。窓スライド版（`map_as_completed`、`(item, 結果 or 例外)` を終わった順に yield）＋セマフォ版（`gather_bounded`）。エラーは握りつぶさず `gather(return_exceptions=True)` 流に値化、リトライは `with_retry` で opt-in。 |
 
 ## 使い方
 
