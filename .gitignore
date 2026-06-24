@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+
+# venv / uv
+.venv/
+
+# tooling caches
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+
+# env / secrets
+.env
+
+# generated artifacts（生成物はコミットしない）
+*.db
+*.sqlite3
+logs/
+.run/
+
+# OS
+.DS_Store
